@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINEメッセージ送信</title>
+</head>
+<body>
+    <h2>画像アップロード</h2>
+    <textarea id="textMessage" placeholder="送信するメッセージを入力"></textarea><br>
+    <input type="file" id="imageInput"><br>
+    <button onclick="sendMessage()">送信</button>
+
+    <script>
+        async function sendMessage() {
+            const textMessage = document.getElementById("textMessage").value;
+            const imageInput = document.getElementById("imageInput").files[0];
+
+            let formData = new FormData();
+            formData.append("text", textMessage);
+            if (imageInput) {
+                formData.append("image", imageInput);
+            }
+
+            const response = await fetch("<<https://script.google.com/macros/s/AKfycbwbfF7hYNpID_LSU3TkgDJukUZElG7EYODNuvkm4qD9UZZwMnw24V1llc8PAsyZnLZ0/exec>>", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>
